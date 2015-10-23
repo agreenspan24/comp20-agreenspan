@@ -14,6 +14,7 @@ function parse() {
 					msg[0].username + "</p>";
 			}*/
 			console.log(msg[0].content + " " + msg[0].username); 
+			console.log(msg[1].content + " " + msg[1].username); 
 		}
 	}
 	request.send(null);
