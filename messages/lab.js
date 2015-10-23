@@ -10,7 +10,7 @@ function parse() {
 			elem = document.getElementById("messages");
 			for (var i = 0; i < msg.length; i++){
 				elem.innerHTML = "<p>" + msg[i].content + " " +
-					msg[i].username;
+					msg[i].username + "</p>";
 			}
 		}
 	}
