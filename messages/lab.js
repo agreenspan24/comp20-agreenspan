@@ -8,15 +8,15 @@ function parse() {
 			data = request.responseText;
 			msg = JSON.parse(data);
 			elem = document.getElementById("messages");
-			/*for (var i = 1; i < 3; i++){
-				console.log("i: " + i);
-				elem.innerHTML = "<p>" + msg[0].content + " " +
-					msg[0].username + "</p>";
-			}*/
-			elem.innerHTML = "<p>" + msg[0].content + " " + 
+			for (var i = 0; i < 2; i++){
+				console.log("msg length: " + msg.length);
+				elem.innerHTML = "<p>" + msg[i].content + " " +
+					msg[i].username + "</p>";
+			}
+			/*elem.innerHTML = "<p>" + msg[0].content + " " + 
 				msg[0].username + "</p>" + "<p>" + msg[1].content + 
 				" " + msg[1].username + "</p>"; 
-			console.log(msg[1].content + " " + msg[1].username); 
+			console.log(msg[1].content + " " + msg[1].username); */
 		}
 	}
 	request.send(null);
