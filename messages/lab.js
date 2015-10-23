@@ -10,7 +10,7 @@ function parse() {
 			elem = document.getElementById("messages");
 			for (var i = 0; i < 2; i++){
 				console.log("msg length: " + msg.length);
-				onclick = function() {elem.innerHTML = "<p>" + msg[i].content + " " +
+				onclick = function(msg, elem) {elem.innerHTML = "<p>" + msg[i].content + " " +
 					msg[i].username + "</p>";}
 			}
 			/*elem.innerHTML = "<p>" + msg[0].content + " " + 
