@@ -13,11 +13,7 @@ function parse() {
 				elem.innerHTML = "<p>" + msg[0].content + " " +
 					msg[0].username + "</p>";
 			}*/
-			elem.innerHTML = "<p>" + msg[0].content + " " +
-					msg[0].username + "</p>";
-			console.log("inbetween");
-			elem.innerHTML = "<p>" + msg[1].content + " " +
-					msg[1].username + "</p>";
+			console.log(msg[0].content + " " + msg[0].username); 
 		}
 	}
 	request.send(null);
