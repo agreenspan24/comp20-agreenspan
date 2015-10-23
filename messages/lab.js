@@ -8,10 +8,10 @@ function parse() {
 			data = request.responseText;
 			msg = JSON.parse(data);
 			elem = document.getElementById("messages");
-			elem.innerHTML = 
-			for (var i = 0; i < 2; i++){"<p>" + msg[i].content + " " +
+			for (var i = 0; i < 2; i++){
+				elem.innerHTML += "<p>" + msg[i].content + " " +
 					msg[i].username + "</p>";
-			};
+			}
 			/*elem.innerHTML = "<p>" + msg[0].content + " " + 
 				msg[0].username + "</p>" + "<p>" + msg[1].content + 
 				" " + msg[1].username + "</p>"; 
