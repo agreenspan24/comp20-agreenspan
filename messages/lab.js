@@ -12,10 +12,6 @@ function parse() {
 				elem.innerHTML += "<p>" + msg[i].content + " " +
 					msg[i].username + "</p>";
 			};
-			/*elem.innerHTML = "<p>" + msg[0].content + " " + 
-				msg[0].username + "</p>" + "<p>" + msg[1].content + 
-				" " + msg[1].username + "</p>"; 
-			console.log(msg[1].content + " " + msg[1].username); */
 		}
 	}
 	request.send(null);
