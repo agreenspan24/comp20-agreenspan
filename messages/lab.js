@@ -12,7 +12,7 @@ function parse() {
 			console.log("step3");
 			elem = document.getElementById("messages");
 			console.log("step4");
-			for (var i = 0; i < msg.length; i++){
+			for (var i = 0; i < 1; i++){
 				console.log("i: " + (i+5));
 				elem.innerHTML = "<p>" + msg[i].content + " " +
 					msg[i].username + "</p>";
