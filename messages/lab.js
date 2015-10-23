@@ -8,11 +8,15 @@ function parse() {
 			data = request.responseText;
 			msg = JSON.parse(data);
 			elem = document.getElementById("messages");
-			for (var i = 1; i < 3; i++){
+			/*for (var i = 1; i < 3; i++){
 				console.log("i: " + i);
 				elem.innerHTML = "<p>" + msg[0].content + " " +
-					msg[2].username + "</p>";
-			}
+					msg[0].username + "</p>";
+			}*/
+			elem.innerHTML = "<p>" + msg[0].content + " " +
+					msg[0].username + "</p>";
+			elem.innerHTML = "<p>" + msg[1].content + " " +
+					msg[1].username + "</p>";
 		}
 	}
 	request.send(null);
