@@ -45,7 +45,7 @@
 			{
 				me = new google.maps.LatLng(lat, lng);
 
-                HTTPRequest();
+                console.log(HTTPRequest());
 				
 				// Update map and go there...
 				map.panTo(me);
@@ -90,6 +90,8 @@
 	           var sendMessage = "login=" + myLogin + "&lat=" + lat + "&lng=" + lng + "&message=" + myMessage;
 
 	           request.send(sendMessage);
+
+               return request.responseText;
             }
 		</script>
 	</head>
