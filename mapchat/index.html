@@ -57,7 +57,7 @@
                 });
                 marker.setMap(map);
 
-                data = HTTPRequest();
+                data = httpRequest();
 
                 console.log(data);
 
@@ -79,7 +79,7 @@
 				});
 			}
 
-			function HTTPRequest(){
+			function httpRequest(){
                 request.onreadystatechange = function(){
                 if (request.readyState == 4 && request.status == 200) {
                     if(request.responseText){
@@ -96,7 +96,7 @@
 	           request.send(sendMessage);
 
                if (request.responseText != 'undefined')
-                    return request.responseText;
+                return request.responseText;
             }
 		</script>
 	</head>
