@@ -70,7 +70,11 @@
 
 	           request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-	           console.log(request.responseText);
+               request.onreadystatechange = function(){
+                if (request.readystate == 4 && request.status == 200) {
+                    console.log(responseText);
+                }
+               }
 
 	           var sendMessage = "login=" + myLogin + "&lat=" + lat + "&lng=" + lng + "&message=" + myMessage;
 
