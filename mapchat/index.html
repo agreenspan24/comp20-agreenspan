@@ -107,7 +107,7 @@
 
 	           request.send(sendMessage);
 
-               if (request.responseText != 'undefined')
+               if (request.responseText != 'undefined' && request.responseText != "")
                 return request.responseText;
             }
 		</script>
