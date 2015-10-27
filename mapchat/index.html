@@ -75,6 +75,12 @@ console.log('3');
                request.onreadystatechange = function(){
                 if (request.readystate == 4 && request.status == 200) {
                     console.log(request.responseText);
+                } else if (request.readystate == 4) {
+                    console.log("status not 200");
+                } else if (request.status == 200) {
+                    console.log("readystate: " + request.readystate)
+                } else {
+                    console.log("neither");
                 }
                }
                console.log('4');
