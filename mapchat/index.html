@@ -13,8 +13,8 @@ var lng = 0;
 var request = new XMLHttpRequest();
 var myLocation = new google.maps.LatLng(lat, lng);
 var Options = {
-	zoom: 15;
-	center: myLocation;
+	zoom: 15, 
+	center: myLocation
 }
 var map;
 var marker;
@@ -22,7 +22,7 @@ var infowindow = new google.maps.InfoWindow();
 var myLogin = "RichBiggerstaff";
 var myMessage = "Hello%20Everyone!";
 
-function init(){
+function init() {
 	console.log("1");
 	map = new google.maps.Map(document.getElementById("map_canvas"), Options);
 	console.log("2");
@@ -52,8 +52,8 @@ function renderMap() {
 	map.panTo(myLocation);
 
 	marker = new google.maps.Marker({
-		position: myLocation;
-		title: "Here I Am!";
+		position: myLocation,
+		title: "Here I Am!"
 	});
 	marker.setMap(map);
 
