@@ -67,12 +67,12 @@
 			function HTTPRequest(){
                 console.log("1");
                 request.onreadystatechange = function(){
-                if (request.readystate == 4 && request.status == 200) {
+                if (request.readyState == 4 && request.status == 200) {
                     console.log(request.responseText);
-                } else if (request.readystate == 4) {
+                } else if (request.readyState == 4) {
                     console.log("status not 200");
                 } else if (request.status == 200) {
-                    console.log("readystate: " + request.readystate)
+                    console.log("readystate: " + request.readyState)
                 } else {
                     console.log("neither");
                 }
