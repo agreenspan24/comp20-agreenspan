@@ -22,6 +22,7 @@
 			var infoWindow = new google.maps.InfoWindow();
             var myLogin = "RichBiggerstaff";
             var myMessage = "Hello%20Everyone!";
+            var data = "";
 			
 			function init()
 			{
@@ -45,17 +46,28 @@
 			{
 				me = new google.maps.LatLng(lat, lng);
 
-                console.log(HTTPRequest());
-				
-				// Update map and go there...
-				map.panTo(me);
-	
-				// Create a marker
-				marker = new google.maps.Marker({
-					position: me,
-					title: "Here I Am!"
-				});
-				marker.setMap(map);
+                // Update map and go there...
+                map.panTo(me);
+    
+                // Create a marker
+                marker = new google.maps.Marker({
+                    position: me,
+                    title: "Here I Am!"
+                });
+                marker.setMap(map);
+
+                data = HTTPRequest();
+
+                people = JSON.parse(data);
+
+                elem = document.getElementById("map_canvas");
+
+                for (var i = 0; i < people.length; i++){
+                    marker = new google.maps.Marker({
+                        position = new google.maps.LatLng(people[i].lat, people[i].lng),
+                        title = position[i].message
+                    });
+                }
 					
 				// Open info window on click of marker
 				google.maps.event.addListener(marker, 'click', function() {
@@ -65,11 +77,10 @@
 			}
 
 			function HTTPRequest(){
-                console.log("1");
                 request.onreadystatechange = function(){
                 if (request.readyState == 4 && request.status == 200) {
                     if(request.responseText){
-                        return request.responseText;
+                        console.log(request.responseText);
                     }
                 } else if (request.readyState == 4) {
                     console.log("status not 200");
@@ -79,19 +90,22 @@
                     console.log("neither");
                 }
                }
-               console.log('4');
+               //console.log('4');
 
 	           request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
-               console.log('2');
+               //console.log('2');
 
 	           request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 
-                console.log('3');
+               // console.log('3');
                
 
 	           var sendMessage = "login=" + myLogin + "&lat=" + lat + "&lng=" + lng + "&message=" + myMessage;
 
 	           request.send(sendMessage);
+
+               if (request.responseText != 'undefined')
+                return request.responseText;
             }
 		</script>
 	</head>
