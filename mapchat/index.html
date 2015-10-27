@@ -10,7 +10,7 @@
 		<script>
 			var lat = 0;
 			var lng = 0;
-			var request = new XMLHttpRequest();
+			var request = new XMLhttpRequest();
 			var me = new google.maps.LatLng(lat, lng);
 			var options = {
 						zoom: 13, 
@@ -23,6 +23,7 @@
             var myLogin = "RichBiggerstaff";
             var myMessage = "Hello%20Everyone!";
             var data = "";
+            var people;
 			
 			function init()
 			{
@@ -56,7 +57,9 @@
                 });
                 marker.setMap(map);
 
-                data = HTTPRequest();
+                data = httpRequest();
+
+                console.log(data);
 
                 people = JSON.parse(data);
 
@@ -76,36 +79,17 @@
 				});
 			}
 
-			function HTTPRequest(){
-                request.onreadystatechange = function(){
-                if (request.readyState == 4 && request.status == 200) {
-                    if(request.responseText){
-                        console.log(request.responseText);
-                    }
-                } else if (request.readyState == 4) {
-                    console.log("status not 200");
-                } else if (request.status == 200) {
-                    console.log("readystate: " + request.readyState)
-                } else {
-                    console.log("neither");
-                }
-               }
-               //console.log('4');
-
+			function httpRequest(){
 	           request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
-               //console.log('2');
 
 	           request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                
-               // console.log('3');
-               
 
 	           var sendMessage = "login=" + myLogin + "&lat=" + lat + "&lng=" + lng + "&message=" + myMessage;
 
 	           request.send(sendMessage);
 
                if (request.responseText != 'undefined')
-                return request.responseText;
+                    return request.responseText;
             }
 		</script>
 	</head>
