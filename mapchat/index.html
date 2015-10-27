@@ -28,10 +28,10 @@ function init() {
 	console.log("2");
 	getMyLocation();
 	console.log("3");
-	renderMap();
+	/*renderMap();
 	console.log("4");
 	HTTPRequest();
-	console.log("5");
+	console.log("5");*/
 }
 
 function getMyLocation() {
@@ -40,6 +40,7 @@ function getMyLocation() {
 			function(pos) {
 				lat = pos.coords.latitude;
 				lng = pos.coords.longitude;
+				renderMap();
 		});
 	} else {
 		alert("Geolocation is not supported by your web browser");
@@ -64,7 +65,7 @@ function renderMap() {
 
 }
 
-function HTTPRequest(){
+/*function HTTPRequest(){
 	request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
 
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -72,7 +73,7 @@ function HTTPRequest(){
 	var sendMessage = "login=" + myLogin + "&lat=" + lat + "&lng=" + lng + "&message=" + myMessage;
 
 	request.send(sendMessage);
-}
+}*/
 	
 </script>
 
