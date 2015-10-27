@@ -3,46 +3,50 @@
 <html>
 
 	<head>
-		<title>Geolocation Map Example</title>
+		<title>MapChat</title>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 		<link rel="stylesheet" href="style.css" />
 		
 		<script>
-			var myLat = 0;
-			var myLng = 0;
+			var lat = 0;
+			var lng = 0;
 			var request = new XMLHttpRequest();
-			var me = new google.maps.LatLng(myLat, myLng);
-			var myOptions = {
-						zoom: 13, // The larger the zoom number, the bigger the zoom
+			var me = new google.maps.LatLng(lat, lng);
+			var options = {
+						zoom: 13, 
 						center: me,
 						mapTypeId: google.maps.MapTypeId.ROADMAP
 					};
 			var map;
 			var marker;
-			var infowindow = new google.maps.InfoWindow();
+			var infoWindow = new google.maps.InfoWindow();
+            var myLogin = "RichBiggerstaff";
+            var myMessage = "Hello%20Everyone!";
 			
 			function init()
 			{
-				map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+				map = new google.maps.Map(document.getElementById("map_canvas"), options);
 				getMyLocation();
 			}
 			
 			function getMyLocation() {
-				if (navigator.geolocation) { // the navigator.geolocation object is supported on your browser
+				if (navigator.geolocation) { 
 					navigator.geolocation.getCurrentPosition(function(position) {
-						myLat = position.coords.latitude;
-						myLng = position.coords.longitude;
+						lat = position.coords.latitude;
+						lng = position.coords.longitude;
 						renderMap();
 					});
 				}
 				else {
-					alert("Geolocation is not supported by your web browser.  What a shame!");
+					alert("Geolocation is not supported by your web browser");
 				}
 			}
 			function renderMap()
 			{
-				me = new google.maps.LatLng(myLat, myLng);
+				me = new google.maps.LatLng(lat, lng);
+
+                HTTPRequest();
 				
 				// Update map and go there...
 				map.panTo(me);
@@ -60,6 +64,18 @@
 					infowindow.open(map, marker);
 				});
 			}
+
+			function HTTPRequest(){
+	           request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
+
+	           request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+	           console.log(request.responseText);
+
+	           var sendMessage = "login=" + myLogin + "&lat=" + lat + "&lng=" + lng + "&message=" + myMessage;
+
+	           request.send(sendMessage);
+            }
 		</script>
 	</head>
 	
@@ -140,6 +156,8 @@ function renderMap() {
 	request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
 
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+	console.log(request.responseText);
 
 	var sendMessage = "login=" + myLogin + "&lat=" + lat + "&lng=" + lng + "&message=" + myMessage;
 
