@@ -66,15 +66,18 @@
 			}
 
 			function HTTPRequest(){
+                console.log("1");
 	           request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
+               console.log('2');
 
 	           request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
+console.log('3');
                request.onreadystatechange = function(){
                 if (request.readystate == 4 && request.status == 200) {
                     console.log(request.responseText);
                 }
                }
+               console.log('4');
 
 	           var sendMessage = "login=" + myLogin + "&lat=" + lat + "&lng=" + lng + "&message=" + myMessage;
 
