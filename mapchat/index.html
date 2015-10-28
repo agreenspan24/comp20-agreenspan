@@ -38,23 +38,25 @@
             elem = document.getElementById("map_canvas");
 
             for (var i = 0; i < ppl.length; i++) {
-                otherStudents[i] = new google.maps.Marker({
-                    position: new google.maps.LatLng(ppl[i].lat, 
-                        ppl[i].lng),
-                    message: ppl[i].message,
-                });
+                if (ppl.login != myLogin) {
+                    otherStudents[i] = new google.maps.Marker({
+                        position: new google.maps.LatLng(ppl[i].lat, 
+                            ppl[i].lng),
+                        title: ppl[i].message,
+                    });
                     
-                otherStudents[i].setMap(map);
+                    otherStudents[i].setMap(map);
 
-                console.log(ppl[i].message);
+                    console.log(ppl[i].message);
 
-                google.maps.event.addListener(otherStudents[i], 'click', function() {
-                    studentInfo[i] = new google.maps.InfoWindow();
+                    google.maps.event.addListener(otherStudents[i], 'click', function() {
+                        studentInfo[i] = new google.maps.InfoWindow();
                         
-                    studentInfo[i].setContent(otherStudents[i].message);
+                        studentInfo[i].setContent(ppl[i].message);
                     
-                    studentInfo[i].open(map, otherStudents[i]);
-                });
+                        studentInfo[i].open(map, otherStudents[i]);
+                    });
+                }
             }
         }
 
