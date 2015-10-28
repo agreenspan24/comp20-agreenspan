@@ -46,8 +46,9 @@
                                 otherStudents[i].setMap(map);
 
                                 google.maps.event.addListener(otherStudents[i], 'click', function() {
-                                infoWindow.setContent(otherStudents[i].title);
-                                infoWindow.open(map, otherStudents[i]);
+                                studentInfo[i] = new google.maps.InfoWindow();
+                                studentInfo[i].setContent(otherStudents[i].title);
+                                studentInfo[i].open(map, otherStudents[i]);
                             });
                             }
                     } 
