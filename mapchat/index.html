@@ -46,8 +46,8 @@
                                 otherStudents[i].setMap(map);
 
                                 google.maps.event.addListener(otherStudents[i], 'click', function() {
-                                infowindow.setContent(otherStudents[i].title);
-                                infowindow.open(map, otherStudents[i]);
+                                infoWindow.setContent(otherStudents[i].title);
+                                infoWindow.open(map, otherStudents[i]);
                             });
                             }
                     } 
@@ -79,8 +79,8 @@
 
                 // Open info window on click of marker
                 google.maps.event.addListener(marker, 'click', function() {
-                    infowindow.setContent(marker.title);
-                    infowindow.open(map, marker);
+                    infoWindow.setContent(marker.title);
+                    infoWindow.open(map, marker);
                 });
 
                 httpRequest();
