@@ -37,11 +37,11 @@
 
             elem = document.getElementById("map_canvas");
 
-            for (var i = 0; i < ppl.length; i++){
+            for (var i = 0; i < ppl.length; i++) {
                 otherStudents[i] = new google.maps.Marker({
                     position: new google.maps.LatLng(ppl[i].lat, 
                         ppl[i].lng),
-                    title: ppl[i].message,
+                    message: ppl[i].message,
                 });
                     
                 otherStudents[i].setMap(map);
@@ -51,7 +51,7 @@
                 google.maps.event.addListener(otherStudents[i], 'click', function() {
                     studentInfo[i] = new google.maps.InfoWindow();
                         
-                    studentInfo[i].setContent(otherStudents[i].title);
+                    studentInfo[i].setContent(otherStudents[i].message);
                     
                     studentInfo[i].open(map, otherStudents[i]);
                 });
@@ -84,7 +84,7 @@
             // Create a marker
             marker = new google.maps.Marker({
                 position: me,
-                title: "Here I Am!",
+                title: "Here I Am!"
             });
 
             marker.setMap(map);
