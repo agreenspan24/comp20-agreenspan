@@ -36,29 +36,21 @@
 
                             elem = document.getElementById("map_canvas");
 
+                            var otherStudents[ppl.length];
+
                             for (var i = 0; i < ppl.length; i++){
-                                marker = new google.maps.Marker({
+                                otherStudents[i] = new google.maps.Marker({
                                     position: new google.maps.LatLng(ppl[i].lat, ppl[i].lng),
                                     title: ppl[i].message
                                 });
+                                otherStudents[i].setMap(map);
                             }
-                    } else if (request.readyState == 4) {
-                        console.log("status not 200");
-                    } else if (request.status == 200) {
-                        console.log("readystate: " + request.readyState)
-                    } else {
-                        console.log("neither");
-                    }
+                    } 
                 } 
-               //console.log('4');
 
                request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
-               //console.log('2');
 
-               request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                
-               // console.log('3');
-               
+               request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");               
 
                var sendMessage = "login=" + myLogin + "&lat=" + lat + "&lng=" + lng + "&message=" + myMessage;
 
