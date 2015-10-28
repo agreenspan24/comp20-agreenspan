@@ -27,7 +27,7 @@
 			
             function httpRequest(){
                 request.onreadystatechange = function(){
-                    while (request.readyState != 4){
+                   // while (request.readyState != 4){
                         if (request.readyState == 4 && request.status == 200) {
                             if(request.responseText){
                              console.log(request.responseText);
@@ -39,7 +39,7 @@
                         } else {
                             console.log("neither");
                         }
-               }    }
+               }   // }
                //console.log('4');
 
                request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
