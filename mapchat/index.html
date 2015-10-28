@@ -27,19 +27,19 @@
 			
             function httpRequest(){
                 request.onreadystatechange = function(){
-                while (request.readyState != 4){}
-                if (request.readyState == 4 && request.status == 200) {
-                    if(request.responseText){
-                        console.log(request.responseText);
-                    }
-                } else if (request.readyState == 4) {
-                    console.log("status not 200");
-                } else if (request.status == 200) {
-                    console.log("readystate: " + request.readyState)
-                } else {
-                    console.log("neither");
-                }
-               }}
+                    while (request.readyState != 4){
+                        if (request.readyState == 4 && request.status == 200) {
+                            if(request.responseText){
+                             console.log(request.responseText);
+                            }
+                        } else if (request.readyState == 4) {
+                            console.log("status not 200");
+                        } else if (request.status == 200) {
+                            console.log("readystate: " + request.readyState)
+                        } else {
+                            console.log("neither");
+                        }
+               }    }
                //console.log('4');
 
                request.open("POST", "https://secret-about-box.herokuapp.com/sendLocation", true);
