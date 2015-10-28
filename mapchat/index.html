@@ -27,6 +27,7 @@
         var people;
         var otherStudents = [];
         var studentInfo = [];
+        var contentString;
 			
         function studentMarkers() {
             data = request.responseText;
@@ -38,7 +39,7 @@
             elem = document.getElementById("map_canvas");
 
             for (var i = 0; i < ppl.length; i++) {
-                if (ppl.login != myLogin) {
+                if (ppl[i].login != myLogin) {
                     otherStudents[i] = new google.maps.Marker({
                         position: new google.maps.LatLng(ppl[i].lat, 
                             ppl[i].lng),
@@ -49,13 +50,17 @@
 
                     console.log(ppl[i].message);
 
-                    /*google.maps.event.addListener(otherStudents[i], 'click', function() {
-                        studentInfo[i] = new google.maps.InfoWindow();
+                    contentString = "<p>login:" + ppl[i].login + "</p><p>Message: " + ppl[i].message + "</p><p>Distance from me: " + haversine(otherStudents[i].position) + "</p>";
+
+                    google.maps.event.addListener('click', function() {
+                        studentInfo[i] = new google.maps.InfoWindow({
+                            content: contentString
+                        });
                         
                         studentInfo[i].setContent(otherStudents[i].title);
                     
                         studentInfo[i].open(map, otherStudents[i]);
-                    });*/
+                    });
                 }
             }
         }
