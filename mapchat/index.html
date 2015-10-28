@@ -25,7 +25,7 @@
             var data = "";
             var people;
 			
-            function HTTPRequest(){
+            function httpRequest(){
                 request.onreadystatechange = function(){
                 if (request.readyState == 4 && request.status == 200) {
                     if(request.responseText){
@@ -71,18 +71,18 @@
                 });
                 marker.setMap(map);
 
-                data = HTTPRequest();
+                data = httpRequest();
 
                 console.log(data);
 
-                people = JSON.parse(data);
+                ppl = JSON.parse(data);
 
                 elem = document.getElementById("map_canvas");
 
-                for (var i = 0; i < people.length; i++){
+                for (var i = 0; i < ppl.length; i++){
                     marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(people[i].lat, people[i].lng),
-                        title: position[i].message
+                        position: new google.maps.LatLng(ppl[i].lat, ppl[i].lng),
+                        title: ppl[i].message
                     });
                 }
                     
