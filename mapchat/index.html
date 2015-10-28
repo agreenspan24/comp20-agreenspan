@@ -44,6 +44,11 @@
                                     title: ppl[i].message
                                 });
                                 otherStudents[i].setMap(map);
+
+                                google.maps.event.addListener(otherStudents[i], 'click', function() {
+                                infowindow.setContent(otherStudents[i].title);
+                                infowindow.open(map, otherStudents[i]);
+                            });
                             }
                     } 
                 } 
@@ -71,13 +76,13 @@
                 });
                 marker.setMap(map);
 
-                httpRequest();
-                    
                 // Open info window on click of marker
                 google.maps.event.addListener(marker, 'click', function() {
                     infowindow.setContent(marker.title);
                     infowindow.open(map, marker);
                 });
+
+                httpRequest();
             }
 
             function getMyLocation() {
