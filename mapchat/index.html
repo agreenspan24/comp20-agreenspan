@@ -106,12 +106,9 @@
                 }
             }
 
-			function init()
-			{
-                document.onload = function() {
-                    map = new google.maps.Map(document.getElementById("map_canvas"), options);
-                    getMyLocation();  
-                }
+			function init() {
+                map = new google.maps.Map(document.getElementById("map_canvas"), options);
+                getMyLocation();  
 			}
 			
 
