@@ -46,6 +46,8 @@
                     
                 otherStudents[i].setMap(map);
 
+                console.log(otherStudents[i].message);
+
                 google.maps.event.addListener(otherStudents[i], 'click', function() {
                     studentInfo[i] = new google.maps.InfoWindow();
                         
