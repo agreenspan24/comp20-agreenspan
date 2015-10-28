@@ -24,6 +24,8 @@
             var myMessage = "Hello%20Everyone!";
             var data = "";
             var people;
+            var otherStudents = [];
+            var studentInfo = [];
 			
             function httpRequest() {
                 request.onreadystatechange = function() {
@@ -35,8 +37,6 @@
                             ppl = JSON.parse(data);
 
                             elem = document.getElementById("map_canvas");
-
-                            var otherStudents = [];
 
                             for (var i = 0; i < ppl.length; i++){
                                 otherStudents[i] = new google.maps.Marker({
