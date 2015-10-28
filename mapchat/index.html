@@ -108,7 +108,7 @@
 
 			function init()
 			{
-                onload = function() {
+                document.onload = function() {
                     map = new google.maps.Map(document.getElementById("map_canvas"), options);
                     getMyLocation();  
                 }
