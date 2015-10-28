@@ -13,7 +13,7 @@
 			var request = new XMLHttpRequest();
 			var me = new google.maps.LatLng(lat, lng);
 			var options = {
-				zoom: 13, 
+				zoom: 15, 
 				center: me,
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 			};
@@ -73,8 +73,8 @@
                 marker = new google.maps.Marker({
                     position: me,
                     title: "Here I Am!",
-                    color: blue
                 });
+
                 marker.setMap(map);
 
                 // Open info window on click of marker
