@@ -29,7 +29,7 @@
         var studentInfo = [];
         var contentString;
 		
-        function haversine(lat1, lng1, lat2, lng2) {
+        function haversine(lat1, lng1, lon2, lon2) {
             function toRad(x) {
                 return x * Math.PI / 180;
             }
@@ -71,7 +71,7 @@
 
                     console.log(ppl[i].message);
 
-                    contentString = "<p>login:" + ppl[i].login + "</p><p>Message: " + ppl[i].message + "</p><p>Distance from me: " + haversine(otherStudents[i].position) + "</p>";
+                    contentString = "<p>login:" + ppl[i].login + "</p><p>Message: " + ppl[i].message + "</p><p>Distance from me: " + haversine(ppl[i].lat, ppl[i].lng, lat, lng) + "</p>";
 
                     google.maps.event.addListener('click', function() {
                         studentInfo[i] = new google.maps.InfoWindow({
