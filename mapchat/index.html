@@ -75,10 +75,10 @@
 
                     contentString = "<p>login: " + ppl[i].login + "</p><p>Message: " + ppl[i].message + "</p><p>Distance from me: " + haversine(ppl[i].lat, ppl[i].lng, lat, lng) + "</p>";
                     
-                    console.log('1');
+                    console.log(i);
 
                     otherStudents[i].addListener('click', function() {
-                        console.log(i);
+                        console.log('2');
                         studentInfo[i] = new google.maps.InfoWindow();
                         console.log('3');
                         studentInfo[i].setContent(contentString);
