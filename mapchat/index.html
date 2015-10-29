@@ -26,7 +26,6 @@
         var sendMessage;
         var people;
         var otherStudents = [];
-        var studentInfo;
         var contentString;
 		
         function haversine(lat1, lon1, lat2, lon2) {
@@ -59,6 +58,8 @@
             ppl = JSON.parse(data);
 
             elem = document.getElementById("map_canvas");
+
+        var studentInfo = [ppl.length];
 
             for (var i = 0; i < ppl.length; i++) {
                     otherStudents[i] = new google.maps.Marker({
