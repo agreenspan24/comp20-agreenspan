@@ -8,8 +8,8 @@
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 	<link rel="stylesheet" href="style.css" />	
 	<script>
-		var lat = 0;
-		var lng = 0;
+		var myLat = 0;
+		var myLng = 0;
 		var request = new XMLHttpRequest();
 		var me;
 		var options = {
@@ -21,8 +21,7 @@
         var myLogin = "RichBiggerstaff";
         var myMessage = "Hello%20Everyone!";
         var data = "";
-        var people;
-        var otherStudents = [];
+        var ppl;
 
         function init() {
             map = new google.maps.Map(document.getElementById("map_canvas"), options);
@@ -33,8 +32,8 @@
             if (navigator.geolocation) { 
                 navigator.geolocation.getCurrentPosition(
                     function(position) {
-                        lat = position.coords.latitude;
-                        lng = position.coords.longitude;
+                        myLat = position.coords.latitude;
+                        myLng = position.coords.longitude;
                         renderMap();
                     });
             } else {
@@ -43,7 +42,7 @@
         }
 
         function renderMap() {
-            me = new google.maps.LatLng(lat, lng);
+            me = new google.maps.LatLng(myLat, myLng);
 
             // Update map and go there...
             map.panTo(me);
@@ -62,7 +61,6 @@
                 icon: image
             });
                     
-                // Open info window on click of marker
             uniqueMarker.setMap(map);
 
             attachListener(uniqueMarker, uniqueMarker.title);
@@ -81,7 +79,7 @@
 
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");               
 
-            var sendMessage = "login=" + myLogin + "&lat=" + lat + "&lng=" + lng + "&message=" + myMessage;
+            var sendMessage = "login=" + myLogin + "&lat=" + myLat + "&lng=" + myLng + "&message=" + myMessage;
 
             request.send(sendMessage);
         }
@@ -103,7 +101,7 @@
                     map: map
                 });
 
-                var contentString = "<p>login: " + ppl[i].login + "</p><p>Message: " + ppl[i].message + "</p><p>Distance from me: " + haversine(ppl[i].lat, ppl[i].lng, lat, lng) + "</p>";
+                var contentString = "<p>login: " + ppl[i].login + "</p><p>Message: " + ppl[i].message + "</p><p>Distance from me: " + haversine(ppl[i].lat, ppl[i].lng, myLat, myLng) + "</p>";
 
                 attachListener(mrkr, contentString);
             }
@@ -144,6 +142,7 @@
 	
 <body onload="init()">
     <h1>MapChat</h1>
+    <h2>By: Adam Greenspan</h2>
 	<div id="map_canvas"></div>
 </body>
 
