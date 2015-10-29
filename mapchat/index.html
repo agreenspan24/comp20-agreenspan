@@ -82,10 +82,10 @@
                     studentInfo[i].setContent(contentString);
                         console.log(studentInfo[i].content);
 
-                    /*google.maps.event.addListener('click', function() {
-                        studentsInfo[i].open(map, otherStudents[i]);
+                    google.maps.event.addListener(marker,'click', function() {
+                        studentsInfo[i].open(map, marker);
                         console.log('5');
-                    });*/
+                    });
             }
         }
 
