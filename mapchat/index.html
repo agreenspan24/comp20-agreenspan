@@ -59,16 +59,16 @@
 
             elem = document.getElementById("map_canvas");
 
-        var studentInfo = [ppl.length];
+            var studentInfo = [];
 
             for (var i = 0; i < ppl.length; i++) {
-                    otherStudents[i] = new google.maps.Marker({
+                    var mrkr = new google.maps.Marker({
                         position: new google.maps.LatLng(ppl[i].lat, 
                             ppl[i].lng),
                         title: ppl[i].message
                     });
                     
-                    otherStudents[i].setMap(map);
+                    mrkr.setMap(map);
 
                     console.log(ppl[i].message);
                     console.log('0');
@@ -77,16 +77,14 @@
                     
                     console.log(i);
 
-                    studentInfo[i] = new google.maps.InfoWindow();
-                        console.log('3');
-                    studentInfo[i].setContent(contentString);
-                        console.log(studentInfo[i].content);
+                    var newWindow = new google.maps.InfoWindow();
 
-                    google.maps.event.addListener(otherStudents[i],'click', function() {
-                        studentsInfo[i].content.open(map, otherStudents[i]);
-                        console.log('5');
+                    newWindow.setContent(contentString);
+
+                    mrkr.addListener('click', function(){
+                        newWindow.open(map, mrkr);
                     });
-                    console.log('6');
+
             }
         }
 
