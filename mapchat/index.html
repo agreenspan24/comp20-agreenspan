@@ -82,10 +82,11 @@
                     studentInfo[i].setContent(contentString);
                         console.log(studentInfo[i].content);
 
-                    google.maps.event.addListener(marker,'click', function() {
-                        studentsInfo[i].open(map, marker);
+                    google.maps.event.addListener(otherStudents[i],'click', function() {
+                        studentsInfo[i].content.open(map, otherStudents[i]);
                         console.log('5');
                     });
+                    console.log('6');
             }
         }
 
