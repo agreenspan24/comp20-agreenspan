@@ -27,67 +27,33 @@
         var people;
         var otherStudents = [];
         var contentString;
-		
-        function haversine(lat1, lon1, lat2, lon2) {
-            return "999";
-            /*function toRad(x) {
-                return x * Math.PI / 180;
-            }
 
-            var R = 6371; // km 
-            //has a problem with the .toRad() method below.
-            var x1 = lat2-lat1;
-            var dLat = toRad(x1);  
-            var x2 = lon2-lon1;
-            var dLon = toRad(x2);  
-            var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
-                Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * 
-                Math.sin(dLon/2) * Math.sin(dLon/2);  
-            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-            var d = R * c; 
-
-            return d;*/
+        function init() {
+            map = new google.maps.Map(document.getElementById("map_canvas"), options);
+            getMyLocation();  
         }
 
-
-        function studentMarkers() {
-            data = request.responseText;
-                            
-            console.log(data);
-
-            ppl = JSON.parse(data);
-
-            elem = document.getElementById("map_canvas");
-
-            var studentInfo = [];
-
-            for (var i = 0; i < ppl.length; i++) {
-                    var mrkr = new google.maps.Marker({
-                        position: new google.maps.LatLng(ppl[i].lat, 
-                            ppl[i].lng),
-                        title: ppl[i].message
+        function getMyLocation() {
+            if (navigator.geolocation) { 
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        lat = position.coords.latitude;
+                        lng = position.coords.longitude;
+                        renderMap();
                     });
-                    
-                    mrkr.setMap(map);
-
-                    console.log(ppl[i].message);
-                    console.log('0');
-
-                    contentString = "<p>login: " + ppl[i].login + "</p><p>Message: " + ppl[i].message + "</p><p>Distance from me: " + haversine(ppl[i].lat, ppl[i].lng, lat, lng) + "</p>";
-                    
-                    console.log(i);
-
-                    var newWindow = new google.maps.InfoWindow();
-
-                    newWindow.setContent(contentString);
-
-                    mrkr.addListener('click', function(){
-                        newWindow.open(map, mrkr);
-                    });
-
+            } else {
+                alert("Geolocation is not supported by your web browser");
             }
         }
 
+        function renderMap() {
+            me = new google.maps.LatLng(lat, lng);
+
+            // Update map and go there...
+            map.panTo(me);
+
+            httpRequest();
+        }
 
         function httpRequest() {
             request.onreadystatechange = function() {
@@ -105,46 +71,58 @@
             request.send(sendMessage);
         }
 
-        function renderMap() {
-            me = new google.maps.LatLng(lat, lng);
+        function studentMarkers() {
+            data = request.responseText;
 
-            // Update map and go there...
-            map.panTo(me);
-    
-            // Create a marker
-            marker = new google.maps.Marker({
-                position: me,
-                title: "Here I Am!"
-            });
+            ppl = JSON.parse(data);
 
-            marker.setMap(map);
+            elem = document.getElementById("map_canvas");
 
-            // Open info window on click of marker
-            google.maps.event.addListener(marker, 'click', function() {
-                infoWindow.setContent(marker.title + " " + myLogin);
-                infoWindow.open(map, marker);
-            });
+            var studentInfo = [];
 
-            httpRequest();
-        }
+            for (var i = 0; i < ppl.length; i++) {
+                var mrkr = new google.maps.Marker({
+                    position: new google.maps.LatLng(ppl[i].lat, 
+                        ppl[i].lng),
+                    title: ppl[i].message,
+                    map: map
+                });
 
-        function getMyLocation() {
-            if (navigator.geolocation) { 
-                navigator.geolocation.getCurrentPosition(
-                    function(position) {
-                        lat = position.coords.latitude;
-                        lng = position.coords.longitude;
-                        renderMap();
-                    });
-            } else {
-                alert("Geolocation is not supported by your web browser");
+                contentString = "<p>login: " + ppl[i].login + "</p><p>Message: " + ppl[i].message + "</p><p>Distance from me: " + haversine(ppl[i].lat, ppl[i].lng, lat, lng) + "</p>";
+
+                attachListener(mrkr, contentString);
             }
         }
 
-		function init() {
-            map = new google.maps.Map(document.getElementById("map_canvas"), options);
-            getMyLocation();  
-		}
+        function haversine(lat1, lon1, lat2, lon2) {
+            function toRad(x) {
+                return x * Math.PI / 180;
+            }
+
+            var R = 6371; // km 
+            //has a problem with the .toRad() method below.
+            var x1 = lat2-lat1;
+            var dLat = toRad(x1);  
+            var x2 = lon2-lon1;
+            var dLon = toRad(x2);  
+            var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
+                Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2);  
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+            var d = R * c; 
+
+            return d;
+        }
+
+        function attachListener(marker, content){
+            var infowindow = new google.maps.InfoWindow({
+                content: content
+            });
+
+            marker.addListener('click', function(){
+                infowindow.open(marker.get('map'), marker);
+            });
+        }
 
 	</script>
 </head>
