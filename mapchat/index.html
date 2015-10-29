@@ -26,11 +26,12 @@
         var sendMessage;
         var people;
         var otherStudents = [];
-        var studentInfo = [];
+        var studentInfo;
         var contentString;
 		
         function haversine(lat1, lon1, lat2, lon2) {
-            function toRad(x) {
+            return "999";
+            /*function toRad(x) {
                 return x * Math.PI / 180;
             }
 
@@ -46,7 +47,7 @@
             var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
             var d = R * c; 
 
-            return d;
+            return d;*/
         }
 
 
@@ -60,7 +61,6 @@
             elem = document.getElementById("map_canvas");
 
             for (var i = 0; i < ppl.length; i++) {
-                if (ppl[i].login != myLogin) {
                     otherStudents[i] = new google.maps.Marker({
                         position: new google.maps.LatLng(ppl[i].lat, 
                             ppl[i].lng),
@@ -70,19 +70,21 @@
                     otherStudents[i].setMap(map);
 
                     console.log(ppl[i].message);
+                    console.log('0');
 
-                    contentString = "<p>login:" + ppl[i].login + "</p><p>Message: " + ppl[i].message + "</p><p>Distance from me: " + haversine(ppl[i].lat, ppl[i].lng, lat, lng) + "</p>";
-
-                    google.maps.event.addListener('click', function() {
-                        studentInfo[i] = new google.maps.InfoWindow({
-                            content: contentString
-                        });
-                        
-                        studentInfo[i].setContent(otherStudents[i].title);
+                    contentString = "login:" + ppl[i].login + "Message: " + ppl[i].message + "Distance from me: " + haversine(ppl[i].lat, ppl[i].lng, lat, lng) ;
                     
+                    console.log('1');
+
+                    google.maps.event.addListener(otherStudents, 'click', function() {
+                        console.log('2');
+                        studentInfo[i] = new google.maps.InfoWindow();
+                        console.log('3');
+                        studentInfo[i].setContent(contentString);
+                        console.log('4');
                         studentInfo[i].open(map, otherStudents[i]);
+                        console.log('5');
                     });
-                }
             }
         }
 
@@ -119,7 +121,7 @@
 
             // Open info window on click of marker
             google.maps.event.addListener(marker, 'click', function() {
-                infoWindow.setContent(marker.title);
+                infoWindow.setContent(marker.title + " " + myLogin);
                 infoWindow.open(map, marker);
             });
 
