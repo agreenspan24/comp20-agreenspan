@@ -72,12 +72,12 @@
                     console.log(ppl[i].message);
                     console.log('0');
 
-                    contentString = "login:" + ppl[i].login + "Message: " + ppl[i].message + "Distance from me: " + haversine(ppl[i].lat, ppl[i].lng, lat, lng) ;
+                    contentString = "<p>login: " + ppl[i].login + "</p><p>Message: " + ppl[i].message + "</p><p>Distance from me: " + haversine(ppl[i].lat, ppl[i].lng, lat, lng) + "</p>";
                     
                     console.log('1');
 
-                    google.maps.event.addListener(otherStudents[i], 'click', function() {
-                        console.log('2');
+                    otherStudents[i].addListener('click', function() {
+                        console.log(i);
                         studentInfo[i] = new google.maps.InfoWindow();
                         console.log('3');
                         studentInfo[i].setContent(contentString);
