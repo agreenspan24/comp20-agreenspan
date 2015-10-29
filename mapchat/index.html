@@ -11,22 +11,18 @@
 		var lat = 0;
 		var lng = 0;
 		var request = new XMLHttpRequest();
-		var me = new google.maps.LatLng(lat, lng);
+		var me;
 		var options = {
 			zoom: 15, 
 			center: me,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
 		var map;
-		var marker;
-		var infoWindow = new google.maps.InfoWindow();
         var myLogin = "RichBiggerstaff";
         var myMessage = "Hello%20Everyone!";
         var data = "";
-        var sendMessage;
         var people;
         var otherStudents = [];
-        var contentString;
 
         function init() {
             map = new google.maps.Map(document.getElementById("map_canvas"), options);
@@ -52,6 +48,25 @@
             // Update map and go there...
             map.panTo(me);
 
+            var image = {
+                url: 'unique-marker.png',
+                size: new google.maps.Size(50, 75),
+                origin: new google.maps.Point(0,0),
+                anchor: new google.maps.Point(25, 75)
+            };
+
+            var uniqueMarker = new google.maps.Marker({
+                position: me,
+                title: "I Am Unique Now!",
+                map: map,
+                icon: image
+            });
+                    
+                // Open info window on click of marker
+            uniqueMarker.setMap(map);
+
+            attachListener(uniqueMarker, uniqueMarker.title);
+
             httpRequest();
         }
 
@@ -66,7 +81,7 @@
 
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");               
 
-            sendMessage = "login=" + myLogin + "&lat=" + lat + "&lng=" + lng + "&message=" + myMessage;
+            var sendMessage = "login=" + myLogin + "&lat=" + lat + "&lng=" + lng + "&message=" + myMessage;
 
             request.send(sendMessage);
         }
@@ -88,7 +103,7 @@
                     map: map
                 });
 
-                contentString = "<p>login: " + ppl[i].login + "</p><p>Message: " + ppl[i].message + "</p><p>Distance from me: " + haversine(ppl[i].lat, ppl[i].lng, lat, lng) + "</p>";
+                var contentString = "<p>login: " + ppl[i].login + "</p><p>Message: " + ppl[i].message + "</p><p>Distance from me: " + haversine(ppl[i].lat, ppl[i].lng, lat, lng) + "</p>";
 
                 attachListener(mrkr, contentString);
             }
@@ -128,6 +143,7 @@
 </head>
 	
 <body onload="init()">
+    <h1>MapChat</h1>
 	<div id="map_canvas"></div>
 </body>
 
