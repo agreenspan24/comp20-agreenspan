@@ -6,23 +6,38 @@
 	<title>Captain's Log</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script>
-	$("#msg").change(function() {
-		console.log('change-called');
+	$(document).ready(function() {
+		reload();
+
+		$("input").change(function() {
+			var today = new Date();
+
+			newMsg = $("#msg").val();
+
+			if (newMsg == "clear log"){
+				clearLog();
+			} else {
+				captainsLog = today + ' - ' + newMsg + '<br><br>';
+
+				$("#log").prepend(captainsLog);
+
+				localStorage.setItem(new Date().getTime(),captainsLog);
+			}
+			$("#msg").val("");
+		});
 	});
 
+	function reload() {
+		Object.keys(localStorage)
+			.forEach(function(key){
+				$("#log").prepend(localStorage.getItem(key));
+			});
+	}
 
-/*
-	$('#msg').submit(function(){
-
-	var today = new Date();
-	console.log(today+' - ' +'hello');
-
-	newMsg = $("#msg").value;
-	console.log(newMsg);
-
-	$("log").html('hello');
-});
-*/
+	function clearLog() {
+		localStorage.clear();
+		$("#log").html("");
+	}
 
 	</script>
 </head>
