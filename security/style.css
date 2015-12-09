@@ -1,11 +1,11 @@
 #PenguingPic {
-	width: 80px;
+	width: 40%;
 	height: 50px;
 	text-align: center;
 }
 
 #AlertPic{
-	width: 80px;
+	width: 40%;
 	height: 50px;
 	text-align: center;
 }
@@ -19,6 +19,6 @@ h2 {
 }
 
 #QueryPic {
-	width: 80px;
+	width: 40%;
 	height: 30px;
 }
