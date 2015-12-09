@@ -1,12 +1,12 @@
 #PenguingPic {
-	max-width: 80px;
-	max-height: 50px;
+	width: 80px;
+	height: 50px;
 	text-align: center;
 }
 
 #AlertPic{
-	max-width: 80px;
-	max-height: 50px;
+	width: 80px;
+	height: 50px;
 	text-align: center;
 }
 
@@ -19,6 +19,6 @@ h2 {
 }
 
 #QueryPic {
-	max-width: 80px;
-	max-height: 30px;
+	width: 80px;
+	height: 30px;
 }
