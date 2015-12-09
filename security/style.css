@@ -1,0 +1,18 @@
+#Pics {
+	max-width: 40%;
+	max-height: 50px;
+	display:inline-block;
+}
+
+h1 {
+	text-align: center;
+}
+
+h2 {
+	text-align: center;
+}
+
+#QueryPic {
+	max-width: 80%;
+	max-height: 30px;
+}
