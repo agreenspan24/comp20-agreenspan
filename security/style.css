@@ -9,12 +9,16 @@ body {
 	width: 40%;
 	height: 30%;
 	text-align: center;
+	border: solid;
+	border-color: black;
 }
 
 #AlertPic{
 	width: 40%;
 	height: 30%;
 	text-align: center;
+	border: solid;
+	border-color: black;
 }
 
 h1 {
@@ -26,6 +30,7 @@ h2 {
 }
 
 #QueryPic {
-	width: 40%;
-	height: 10%;
+	width: 60%;
+	height: 15%;
+	text-align: center;
 }
