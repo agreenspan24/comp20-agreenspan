@@ -20,6 +20,7 @@ The assessment was carried out in two stages:
 </ul>
 
 <h2>Abstract of Findings</h2>
+<p>This application lacks most security measures necessary for private use. While it does ensure that users do have the proper login, the overall information requires no private information and can be submitted in almost any format, as long as there is a login provided. While the application does have flexibility in that it won't break if an element that should be a number is actually a word, it doesn't check if an element is of the right type and generally trusts the user to submit perfect information, which is not a good security model.</p>
 
 <h2>Issues Found</h2>
 <h3>Cross-Site Scripting (XSS)</h3>
@@ -43,8 +44,8 @@ The assessment was carried out in two stages:
 <p>Any hacker could simply go to the index page and use any of the logins displayed on said page to send their own information to the site, either through XSS or Query Injection or other methods. As the login is the only security measure of filtering users, its security purpose is defeated by the the home page.</p>
 <p>This problem could be solved by creating a list of passwords to go along with the usernames. If the passwords were private, it would retain the privacy of accounts and prevent people who have not been assigned an account from checking in.</p>
 
-
 <h2>Conclusion</h2>
+<p>Problems with this application can be divided into two types: basic and structural. Basic problems have to do with submitted data and could easily be fixed with a few tweaks to the code to make sure that data submitted to the application is harmless and works with the model provided. The structural problems have to do with the fact that there is no privacy mechanism like a password that prevents someone from hacking the site. While XSS and query injections can be guarded against, it is so easy for a hacker to pose as a user with an account that I would recommend that users be given passwords and to keep that data hidden in order to prevent attacks and unwanted users.</p>
 
 </body>
 
