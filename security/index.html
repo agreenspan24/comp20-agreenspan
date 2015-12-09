@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>MapChat Security</title>
-<link href=style.css rel=stylesheet/>
+<link href="style.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -38,7 +38,7 @@ The assessment was carried out in two stages:
 <p>Affects GET API, ('latest.json')</p>
 <p>LOW severity of the issue: worst case scenario here that I was able to find was that latest.json would return the wrong element</p>
 <p>First, I should note that the developer's latest.json section was not working when I tried to run it. My conclusions on the Query Injection Attack are based a combination of theoretical observations and the use of a similar, working code.<br><br>The developer does a good job at protecting against a Query Injection Attack by only using a login element and checking that login against the white list of acceptable usernames. Yet it is still vulnerable to requests like <code>?login[$ne]=mchow</code> or <code>?login[$exists]=mchow</code>, which return documents other than the latest json document of the queried login (See picture below)</p>
-<img src="QueryInjection.png" alt="Query Injection Attack">
+<img id="QueryPic" src="QueryInjection.png" alt="Query Injection Attack">
 <p>Fixing this vulnerability could be difficult as it would require stripping the element between the brackets before activating the query, but it also may be that the searcher may intentionally search for this. Regardless, it would be possible to look at the whole query as a string and remove the malicious element before proceeding.</p>
 
 <h3>Homepage Security</h3>
