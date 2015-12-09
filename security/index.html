@@ -1,8 +1,51 @@
+<!DOCTYPE html>
+
 <html>
 <head>
 <title>MapChat Security</title>
 </head>
 
+<body>
+<h1>MapChat Security</h1>
 
+<h2>Introduction</h2>
+MapChat is a web application designed to display a user and other users on a map with their messages. This version of the web application was developed by Daniella DiPaola. This security assessment assesses the security and privacy vulnerabilites of this application.
+
+<h2>Methodology</h2>
+The assessment was carried out in two stages:
+
+<ul>
+<li>The first stage was a "black-box" test, using tools like Curl to attack the application without seeing the source code. The main strategy found here was Cross-Site Scripting</li>
+<li>The second stage was to read the source code and search for additional vulnerabilities, including through white-box testing of the application</li>
+</ul>
+
+<h2>Abstract of Findings</h2>
+
+<h2>Issues Found</h2>
+<h3>Cross-Site Scripting (XSS)</h3>
+<p>Affects GET API, ('/')</p>
+<p>HIGH severity of the issue: This can affect the homepage when printed out on the GET ('/') API. Moreover, this was the first vulnerability I discovered and did so in the black-box stage of testing. It can be done easily through curl and only requires knowledge of an acceptable username</p>
+<p>Data submitted by the POST method ('/sendLocation') is not sanitized and has few restrictions other than matching a login from the white list. This means HTML or Javascript code can be written into the original POST message and alter the GET API (/). This includes adding images with HTML (<code>message=&lt;img src=http://4.bp.blogspot.com/_6CYi-7r9Twc/TNwWYpiIyoI/AAAAAAAAAEs/WghP7oPYfnI/s1600/Tuxedo Penguin.png&gt;</code>, See first picture below) or by Javascript (<code>message=&lt;script&gt;alert(\"hello\");&lt;\/script&gt;)</code>, See second picture below). This cross-site scripting also has the power to redirect to malicious sites (<code>message=&lt;script&gt;window.location="https://www.facebook.com";&lt;script&gt;</code>). Finally, while I would suspect most assignments left the ability do XSS within the message box, this assignment also left open the ability to send malicious content to lat and lng elements as well, as they were neither santized nor parsed into Floats. </p>
+<img src="Penguin.png" alt="Penguin in a tuxedo">
+<img src="Alert.png" alt="Alert Pop-Up">
+<p>This issue is fairly simple to resolve: just strip out the user input before putting it into the database. It could also be rejected at the outset. It could even be sanitized in the GET API just before posting.</p>
+
+<h3>Query Injection Attack</h3>
+<p>Affects GET API, ('latest.json')</p>
+<p>LOW severity of the issue: worst case scenario here that I was able to find was that latest.json would return the wrong element</p>
+<p>First, I should note that the developer's latest.json section was not working when I tried to run it. My conclusions on the Query Injection Attack are based a combination of theoretical observations and the use of a similar, working code.<br><br>The developer does a good job at protecting against a Query Injection Attack by only using a login element and checking that login against the white list of acceptable usernames. Yet it is still vulnerable to requests like <code>?login[$ne]=mchow</code> or <code>?login[$exists]=mchow</code>, which return documents other than the latest json document of the queried login (See picture below)</p>
+<img src="QueryInjection.png" alt="Query Injection Attack">
+<p>Fixing this vulnerability could be difficult as it would require stripping the element between the brackets before activating the query, but it also may be that the searcher may intentionally search for this. Regardless, it would be possible to look at the whole query as a string and remove the malicious element before proceeding.</p>
+
+<h3>Homepage Security</h3>
+<p>Affects GET API, ('/') and general privacy and security</p>
+<p>MEDIUM severity of the issue: having a homepage that displays every login makes the page vulnerable to logins of people outside the group of mapchat users, as there is no accompanying password with username that is private</p>
+<p>Any hacker could simply go to the index page and use any of the logins displayed on said page to send their own information to the site, either through XSS or Query Injection or other methods. As the login is the only security measure of filtering users, its security purpose is defeated by the the home page.</p>
+<p>This problem could be solved by creating a list of passwords to go along with the usernames. If the passwords were private, it would retain the privacy of accounts and prevent people who have not been assigned an account from checking in.</p>
+
+
+<h2>Conclusion</h2>
+
+</body>
 
 </html>
