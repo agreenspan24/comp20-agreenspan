@@ -1,6 +1,6 @@
 #Pics {
-	max-width: 80px;
-	max-height: 30px;
+	max-width: 8px;
+	max-height: 3px;
 	text-align: center;
 }
 
@@ -12,7 +12,7 @@ h2 {
 	text-align: center;
 }
 
-#QueryPic {
+/*#QueryPic {
 	max-width: 80%;
 	max-height: 30px;
-}
+}*/
