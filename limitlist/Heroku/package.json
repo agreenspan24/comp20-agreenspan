@@ -1,0 +1,12 @@
+{
+    "name": "Comp-20-Final-Project",
+    "version": "0.0.1",
+    "dependencies": {
+        "express": "latest",
+        "mongodb": "x",
+        "validator": "latest",
+        "body-parser": "latest",
+        "express-json":"latest",
+        "sendgrid": "^1.9.2"
+    }
+}

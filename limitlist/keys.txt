@@ -1,0 +1,7 @@
+SC:
+	client ID: 4a76390d7b118c5402b5861dda364105
+	Client secret: b7f28490857392f98c83ca3d77eb8b27
+
+FB:
+	App ID: 1674006246149252
+	

@@ -1,0 +1,60 @@
+.onbackground {
+  color: #fff;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.fb-like {
+    display: inline-block;
+    position: fixed !important;
+    bottom: 0px;
+    left: 0px;
+    background-color: #3D3839; 
+    width: 100%;
+    height: 20px !important; 
+}
+
+h1 {
+	padding-top: 50px;
+	text-align: center;
+	font-family: "Arial", Helvetica, sans-serif;
+}
+
+h4 {
+	padding-top: 50px;
+	padding-bottom: 50px;
+	text-align: center;
+	font-family: "Arial", Helvetica, sans-serif;
+}
+
+h3 {
+	text-align: center;
+	font-family: "Arial", Helvetica, sans-serif;
+}
+
+body {
+	margin-right: 20%;
+	margin-left: 20%;
+}
+
+#bottom-buttons {
+	text-align: center;
+}
+
+#Member{
+	text-align: center;
+	position: center;
+}
+
+#result{
+	text-align: center;
+
+	  color: #fff;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+#mychart{
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: auto;
+	margin-top: auto; 
+}

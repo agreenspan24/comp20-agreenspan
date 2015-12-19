@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="Chart.js"></script>
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
+
+    <link href="/limitlist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+<!-- Start Bootstrap Custom CSS -->
+<link href="/limitlist/css/startbootstrap.css" rel="stylesheet" type="text/css">
+<script src="/limitlist/js/bootstrap.min.js"></script>
+
+<script src="/limitlist/js/docs.js"></script>
+</head>
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/limitlist/">Limitlist</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+
+                <li>
+                    <a href="/limitlist/help" title="Help with Limitlist ">Help</a>
+                </li>
+                <li>
+                    <a href="/limitlist/about.html" title="About Limitlist & the Team">About Us</a>
+                </li>
+                <li>
+                    <a href="/limitlist/genregraph.html" title="What Genres Are Most Popular?">Genre Graph</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/limitlist/login.html" title="Log in">Login</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<h2> Which Limitlist Genres are most Popular?<h2/>
+	<canvas id="myChart" width="400" height="400"></canvas>
+	<script type="text/javascript">
+
+    data = [{
+    
+        value: 0,
+        color:"#F7464A",
+        highlight: "#FF5A5E",
+        label: "Jazz"
+    },
+    {
+        value: 0,
+        color: "#46BFBD",
+        highlight: "#5AD3D1",
+        label: "Rock"
+    },
+    {
+        value: 0,
+        color: "#FDB45C",
+        highlight: "#FFC870",
+        label: "Classical"
+    }, 
+    {
+    
+        value: 0,
+        color:"#33FFDD",
+        highlight: "#FF5A5E",
+        label: "Country"
+    },
+    {
+    
+        value: 0,
+        color:"#8B81FF",
+        highlight: "#FF5A5E",
+        label: "Electronic"
+    },
+    {
+    
+        value: 0,
+        color:"#2137FF",
+        highlight: "#FF5A5E",
+        label: "Hip Hop"
+    },
+    {
+    
+        value: 0,
+        color:"#5FBFA6",
+        highlight: "#FF5A5E",
+        label: "Pop"
+    },
+    {
+    
+        value: 0,
+        color:"#FFAE1A",
+        highlight: "#FF5A5E",
+        label: "Rap"
+    }
+]
+
+    $.get('https://group-project.herokuapp.com/getGenreInfo', {genre: "Jazz"}, function(info, status){
+                       jazz = info.count;
+                       data[0].value = jazz;
+                   });
+        $.get('https://group-project.herokuapp.com/getGenreInfo', {genre: "Rock"}, function(info, status){
+                       rock = info.count;
+                       data[1].value = rock;
+                   }); 
+        $.get('https://group-project.herokuapp.com/getGenreInfo', {genre: "Classical"}, function(info, status){
+                       classical = info.count;
+                       data[2].value = classical;
+                   }); 
+        $.get('https://group-project.herokuapp.com/getGenreInfo', {genre: "Country"}, function(info, status){
+                       country = info.count;
+                       data[3].value = country;
+                   }); 
+                $.get('https://group-project.herokuapp.com/getGenreInfo', {genre: "Electronic"}, function(info, status){
+                       electronic = info.count;
+                       data[4].value = electronic;
+                   });
+                                $.get('https://group-project.herokuapp.com/getGenreInfo', {genre: "Hip Hop"}, function(info, status){
+                       hip = info.count;
+                       data[5].value = hip;
+                   });
+                 $.get('https://group-project.herokuapp.com/getGenreInfo', {genre: "Pop"}, function(info, status){
+                       pop = info.count;
+                       data[6].value = pop;
+                   });
+                                  $.get('https://group-project.herokuapp.com/getGenreInfo', {genre: "Rap"}, function(info, status){
+                       rap = info.count;
+                       data[7].value = rap;
+                        ctx = document.getElementById("myChart").getContext("2d");
+                        myNewChart = new Chart(ctx).PolarArea(data); 
+                   });
+                                  </script>
+
+
+
+
+ 
+
+
+
+
+
+
+</body>
+
+</html>

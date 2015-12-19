@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
+<script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+
+<script>
+	
+	window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1674006246149252',
+                xfbml      : true,
+                version    : 'v2.5'
+            });
+
+            FB.getLoginStatus(function(response) {
+              if (response.status === 'connected') {
+                connecter=true;
+                FB.api('/me', function(user) {
+                  	var Login = user.name;
+                  	console.log(Login);
+                    
+                   $.get('https://group-project.herokuapp.com/getInfo', {login: Login}, function(info, status){
+                      SC.initialize({
+                        client_id: 'c786cf738f1a564949dfd66e18bce051',
+                        redirect_uri: 'https://tuftsdev.github.io/comp20-f2015-team19/callback.html'
+                      });
+
+                      SC.connect().then(function() {
+                        return SC.get('/me');
+                      }).then(function(me) {
+                        alert('Hello, ' + me.username);
+                      });
+
+                      var dur = info.duration;
+                      var genre = info.genre;
+                      console.log(dur);
+                      console.log(genre);
+
+                      
+                   }); 
+            	});
+              }
+            });  	      
+    };
+    (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));              
+</script>
+</head>
+
+<body>
+	<h1>TESTPAGE</h1>
+</body>
+
+</html>	

@@ -1,0 +1,103 @@
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <!-- Bootstrap Core CSS -->
+<link href="/comp20-f2015-team19/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+<!-- Start Bootstrap Custom CSS -->
+<link href="/comp20-f2015-team19/css/startbootstrap.css" rel="stylesheet" type="text/css">
+  <title>Playlists</title>
+  <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script>
+  function find_tracks(){
+        FB.api('/me', function(response) {
+                var name = response.name;
+                SC.initialize({
+                  client_id: 'c786cf738f1a564949dfd66e18bce051',
+                  redirect_uri: 'https://group-project.herokuapp.com/callback'
+                });
+
+                 SC.connect().then(function() {
+                 return SC.get('/me');
+                 }).then(function(me) {
+                    alert('Hello, ' + me.username);
+                });
+                $.get('https://group-project.herokuapp.com/getData', function(data, status){
+                    var valid = [];
+                    var parsed = JSON.parse(data);
+                    var genre = parsed["genre"];
+                    var duration = parsed["duration"];
+                    SC.get('/playlists', {q: genre }), (function(lists) {
+                      for(var i = 0; i < lists.length; i++){
+                        if(lists[i].duration < duration){
+                         valid += lists[i];
+                        }
+                      }
+                     var longest = valid[0];
+                    for(var j = 0; j < valid.length; j++){
+                       if(valid[j] > longest){
+                          longest = valid[j]
+                        }
+                    }
+                    var track_url = longest.permalink_url;
+                      SC.oEmbed(track_url, { auto_play: true }).then(function(oEmbed) {
+                          console.log('oEmbed response: ', oEmbed);
+                      });
+                   });
+                });
+          });
+        }
+
+  </script>
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Limitlist</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+
+                <li>
+                    <a href="/help" title="Help with Limitlist ">Help</a>
+                </li>
+                <li>
+                    <a href="/comp20-f2015-team19/about.html" title="About Limitlist & the Team">About Us</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/comp20-f2015-team19/login.html" title="Log in">Login</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+  <div id="playlist"></div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+<script src="/comp20-f2015-team19/js/docs.js"></script>
+</body>
+</html>

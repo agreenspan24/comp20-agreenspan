@@ -1,0 +1,22 @@
+classical x classical music the essential collection (https://soundcloud.com/classical-music-playlist/sets/classical-music-essential-collection) 
+- uri https://api.soundcloud.com/playlists/40936190
+
+country x my fav [country] (https://soundcloud.com/cpbravo/sets/my-fav-country) - uri https://api.soundcloud.com/playlists/48628683
+
+electronic x EDM (https://soundcloud.com/iloveedm20/sets/edm) 
+- uri https://api.soundcloud.com/playlists/57553113
+
+hip hop x Hot hits (https://soundcloud.com/hiphoprelevant/sets/playlist) 
+- uri https://api.soundcloud.com/playlists/4192463
+
+jazz x Jazz (https://soundcloud.com/tareq-morsy/sets/clasic)
+- uri https://api.soundcloud.com/playlists/12500137
+
+pop x Best songs of 2015 pt 1 (https://soundcloud.com/3s-up/sets/best-songs-of-2015-pt-1)
+-uri https://api.soundcloud.com/playlists/105708592
+
+rap x Classic rap (https://soundcloud.com/user880241256/sets/classic-rap)
+-uri https://api.soundcloud.com/playlists/83984756
+
+rock x Classic rock (https://soundcloud.com/travisgreene29/sets/classic-rock)
+-uri https://api.soundcloud.com/playlists/38568520
