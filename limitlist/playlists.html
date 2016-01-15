@@ -1,0 +1,167 @@
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <!-- Bootstrap Core CSS -->
+  <link href="/comp20-agreenpsan/limitlist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Start Bootstrap Custom CSS -->
+  <link href="/comp20-agreenpsan/limitlist/css/startbootstrap.css" rel="stylesheet" type="text/css">
+
+  <title>Playlists</title>
+  <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
+  <script type="text/javascript" src="https://w.soundcloud.com/player/api.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+  <script src="/comp20-agreenpsan/limitlist/js/docs.js"></script>
+  <script type="text/javascript">
+  window.fbAsyncInit = function() {
+    FB.init({
+        appId      : '1674006246149252',
+        xfbml      : true,
+        version    : 'v2.5'
+    });
+
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        connecter=true;
+        FB.api('/me', function(user) {
+          var Login = user.name;
+
+          $.get('https://group-project.herokuapp.com/getInfo', {login: Login}, function(info, status){
+              SC.initialize({
+                client_id: 'c786cf738f1a564949dfd66e18bce051',
+                redirect_uri: 'https://tuftsdev.github.io/comp20-agreenpsan/limitlist/callback.html'
+              });
+
+              var dur = info.duration;
+              var genre = info.genre;
+              var playlist, tracks;
+              var getter = '/comp20-agreenpsan/limitlist/playlist_jsons/'+genre+'.json';
+
+              var subtitle="Here's Your "+genre+" Limitlist of "+dur+" Minutes";
+              $('h3').html(subtitle);
+
+              var request = new XMLHttpRequest();
+              request.open("GET", getter, true);
+
+              request.onreadystatechange = function(){
+                if (request.readyState == 4){
+                  data = request.response;
+                  playlist = JSON.parse(data);
+                  tracks = playlist.tracks;
+
+                  tracks.sort(function(a,b){return b.duration-a.duration;});
+
+                  var list = [];
+                  var targetDur = dur*60000;
+                  var dur_remaining = targetDur;
+                  var count = 0;
+
+                  for (var i=0;dur_remaining>0&&i<tracks.length; i++){
+                    if (tracks[i].duration <= dur_remaining){
+                      list[count] = tracks[i];
+                      dur_remaining -= tracks[i].duration;
+                      count++;
+                    }
+                  }
+
+                  list.sort(function(a,b){return b.playback_count-a.playback_count;});
+                
+                  var index = 1;
+
+                  var iframe = document.querySelector('.iframe');
+                  iframe.src = 'https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F'+list[0].id+'&auto_play=true';
+                  var widget = SC.Widget(iframe);
+
+                  var eventKey, eventName;
+                  for (eventKey in SC.Widget.Events) {
+                    (function(eventName, eventKey) {
+                      eventName = SC.Widget.Events[eventKey];
+                      widget.bind(eventName, function(eventData) {
+                        if (eventName=="finish"){
+                          widget.load(list[index].permalink_url, {auto_play:true})
+                          index++;
+                        }
+                      });
+                    }(eventName, eventKey));
+                  }
+                }
+              }
+              request.send(null);
+           }); 
+        });
+      }
+    });         
+  };
+  (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));   
+</script>
+
+</head>
+
+<body onload = >
+  <script src="/comp20-agreenpsan/limitlist/js/jquery.backstretch.min.js"></script>
+  <script> (function($) {jQuery(document).ready(function() {$.backstretch("whatisthis.jpg");})})(jQuery); </script>
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/comp20-agreenpsan/limitlist/">Limitlist</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+
+                <li>
+                    <a href="/comp20-agreenpsan/limitlist/help" title="Help with Limitlist ">Help</a>
+                </li>
+                <li>
+                    <a href="/comp20-agreenpsan/limitlist/about.html" title="About Limitlist & the Team">About Us</a>
+                </li>
+                <li>
+                    <a href="/comp20-agreenpsan/limitlist/genregraph.html" title="What Genres Are Most Popular?">Genre Graph</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/comp20-agreenpsan/limitlist/login.html" title="Log in">Login</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<link rel='stylesheet' href='css/extras.css'/>
+
+<h1 class=onbackground>Limitlist</h1>
+
+<div class="container-fluid">
+  <h3 class=onbackground></h3>
+  <iframe class="iframe"
+    width="100%"
+    frameborder="no">
+  </iframe> 
+</div>
+
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> Limitlist </title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/comp20-agreenpsan/limitlist/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="/comp20-agreenpsan/limitlist/css/extras.css" rel="stylesheet" type="text/css">
+
+    <!--  Bootstrap Custom CSS for menu bar -->
+    <link href="/comp20-agreenpsan/limitlist/css/startbootstrap.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/comp20-agreenpsan/limitlist/js/bootstrap.min.js"></script>
+    
+
+    <script src="/comp20-agreenpsan/limitlist/js/docs.js"></script>
+
+    <script src="/comp20-agreenpsan/limitlist/js/jquery.backstretch.min.js"></script>
+
+</head>
+
+<body onload = >
+    <script> (function($) {jQuery(document).ready(function() {$.backstretch("whatisthis.jpg");})})(jQuery); </script>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/comp20-agreenpsan/limitlist/index.html">Limitlist</a>
+            </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/comp20-agreenpsan/limitlist/help.html" title="Help with Limitlist ">Help</a>
+                    </li>
+                    <li>
+                        <a href="/comp20-agreenpsan/limitlist/about.html" title="About Limitlist & the Team">About Us</a>
+                    </li>
+                    <li>
+                        <a href="/comp20-agreenpsan/limitlist/genregraph.html" title="What Genres Are Most Popular?">Genre Graph</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/comp20-agreenpsan/limitlist/login.html" title="Log in" id = "loginout">Login</a>
+                    </li>
+                </ul>
+            </div>
+        <!-- /.navbar-collapse -->
+        </div>
+    <!-- /.container -->
+    </nav>
+
+    <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <h1 class=onbackground>Limitlist</h1>
+    
+    <div id="result"></div>
+    
+    <script>
+        if (localStorage.clickcount){
+            document.getElementById("result").innerHTML = "You have created " +
+            localStorage.clickcount + " playlists with Limitlist so far!";     
+        }
+    </script>
+    
+    <script type="text/javascript">
+        function clickCounter(){
+            if (localStorage.clickcount) {
+                localStorage.clickcount = Number(localStorage.clickcount) + 1;
+            } else {
+                localStorage.clickcount = 1;
+            }
+            document.getElementById("result").innerHTML = "You have created " +
+            localStorage.clickcount + " playlists with Limitlist so far!";
+        }
+    </script>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-lg-3"></div>
+                <div class="col-md-6 col-lg-6">
+                    <form role="form" method="post" action='https://group-project.herokuapp.com/sendData' name="user_input">
+                        <div class='form-group'>
+                            <input type = "hidden" id="Name" class="form-control" placeholder="Enter Name" name="Name" >
+                        </div>
+                        <div class='form-group'>
+                            <label for = "Email">Email:</label><br>
+                            <input type = "text" id="Email" class="form-control" placeholder="Enter Email" name="email">
+                        </div>
+                        <div class='form-group'>
+                            <label for = "Duration">Length:</label><br>
+                            <input type = "text" id="Duration" class="form-control" placeholder="Enter Duration in Minutes" name="duration">
+                        </div> 
+                        <div class="form-group">
+                            <label for="Genre">Genre:</label>
+                            <select class="form-control" id="Genre" name="genre">
+                                <option value="">(Select One)</option>
+                                <option value="Classical">Classical</option>
+                                <option value="Country">Country</option>
+                                <option value="Electronic">Electronic</option>
+                                <option value="Hip Hop">Hip Hop</option>
+                                <option value="Jazz">Jazz</option>
+                                <option value="Pop">Pop</option>
+                                <option value="Rap">Rap</option>
+                                <option value="Rock">Rock</option>
+                            </select>
+                        </div>
+                        <div id="bottom-buttons">
+                            <input class="btn btn-success" id="submit-button" onclick = "clickCounter()" type="submit" value="Submit" />
+                            <input class="btn btn-default" id="reset-button" type="reset" value="Reset"/>
+                        </div>
+                    </form>
+                </div>
+            <div class="col-md-3 col-lg-3"></div>
+        </div>
+    </div>
+
+    <script>
+            (function(d, s, id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {return;}
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1674006246149252',
+                xfbml      : true,
+                version    : 'v2.5'
+            });
+
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    connecter=true;
+                    FB.api('/me', function(user) {
+                        document.getElementById("Name").value = user.name;
+                        });
+                    document.getElementById("loginout").innerHTML = "Logout";
+                    document.getElementById("loginout").href = "/comp20-agreenpsan/limitlist/logout.html";
+                    document.getElementById("loginout").title = "Log out";
+                } 
+            });
+        };
+    </script>
+
+    <div class="footer">
+    <div
+        class="fb-like"
+        data-share="true"
+        data-width="450"
+        data-show-faces="false">
+    </div>
+    </div> 
+
+</body>
+
+</html>
+<!-- Created for Tufts University CS 20 Fall 2015 Group Semester Project. All Rights Reserved: Deanna Bessy, Adam Greenspan, Grant Pemberton, Ryan Schneiderman-->

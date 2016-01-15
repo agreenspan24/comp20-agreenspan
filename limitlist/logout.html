@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Log Out</title>
+<meta charset="UTF-8">
+</head>
+
+<body>
+<div id="status">
+</div>
+<script>
+(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+	window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1674006246149252',
+                xfbml      : true,
+                version    : 'v2.5'
+            });
+	    FB.getLoginStatus(function(response) {
+        if (response && response.status === 'connected') {
+            FB.logout(function(response) {
+                document.location.reload(true);
+            });
+        }
+        else {
+        	document.getElementById('status').innerHTML =
+        "You've logged out. Bye now! Redirecting to home..." ;
+
+        setTimeout(function(){window.location = "/comp20-agreenpsan/limitlist/index.html";}, 2000);
+        }
+    });
+    };
+
+
+</script>
+
+
+
+</body>
+</html>
